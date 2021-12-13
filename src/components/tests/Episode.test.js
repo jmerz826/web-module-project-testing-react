@@ -8,6 +8,18 @@ test("renders without error", () => {
     render(<Episode episode={ []}/>);
 });
 
-test("renders the summary test passed as prop", ()=>{});
+test("renders the summary test passed as prop", () => {
+    render(<Episode episode={{ summary: 'testing testing 123' }} />);
+    
+    const summaryTest = screen.queryByText(/testing testing 123/i);
 
-test("renders default image when image is not defined", ()=>{});
+    expect(summaryTest).toBeInTheDocument();
+});
+
+test("renders default image when image is not defined", () => {
+    render(<Episode episode={{ image: null }} />);
+    
+    const defaultImg = screen.getByAltText('https://i.ibb.co/2FsfXqM/stranger-things.png');
+
+    expect(defaultImg).toBeInTheDocument();
+});
